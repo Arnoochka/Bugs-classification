@@ -3,7 +3,7 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 import pickle
 import torch
-from net import ResNet18 as Net
+from net import CustomCNN as Net
 from tqdm import tqdm
 import os
 import yaml
