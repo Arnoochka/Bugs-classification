@@ -1,4 +1,11 @@
 stages:
+  download:
+    cmd: python src/downloader.py
+    deps:
+    - src/downloader.py
+    outs:
+    - data/not_splitted
+    
   prepare:
     cmd: python src/prepare.py
     deps:
