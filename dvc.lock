@@ -1,0 +1,89 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - path: data/not_splitted
+      hash: md5
+      md5: 0fa4ab8e4e129cc04c2b774f926dd8c5.dir
+      size: 743667238
+      nfiles: 6040
+    - path: src/prepare.py
+      hash: md5
+      md5: 535655ad5591684f558451d9e07cb946
+      size: 1343
+    outs:
+    - path: data/splitted
+      hash: md5
+      md5: 6b2279adf0e10208323d73b03ea72fbb.dir
+      size: 743667238
+      nfiles: 6040
+  featurize:
+    cmd: python src/featurization.py
+    deps:
+    - path: data/splitted
+      hash: md5
+      md5: 6b2279adf0e10208323d73b03ea72fbb.dir
+      size: 743667238
+      nfiles: 6040
+    - path: src/featurization.py
+      hash: md5
+      md5: 47caab107dae49ee45e3dfe012c31cb0
+      size: 1276
+    outs:
+    - path: data/features
+      hash: md5
+      md5: 74daf1031005e1e4f8934b55db6c11e6.dir
+      size: 276502
+      nfiles: 2
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/features
+      hash: md5
+      md5: 74daf1031005e1e4f8934b55db6c11e6.dir
+      size: 276502
+      nfiles: 2
+    - path: src/train.py
+      hash: md5
+      md5: 7c8d2751802f9ceb155e9e8eab44f269
+      size: 3353
+    outs:
+    - path: models
+      hash: md5
+      md5: 02426b064ba55e37bada77f04dd527b3.dir
+      size: 45851733
+      nfiles: 1
+    - path: results/train
+      hash: md5
+      md5: 78a59c2a3778aed3c006b04d07585344.dir
+      size: 467
+      nfiles: 2
+  inference:
+    cmd: python src/inference.py
+    deps:
+    - path: data/features
+      hash: md5
+      md5: 74daf1031005e1e4f8934b55db6c11e6.dir
+      size: 276502
+      nfiles: 2
+    - path: models
+      hash: md5
+      md5: 02426b064ba55e37bada77f04dd527b3.dir
+      size: 45851733
+      nfiles: 1
+    - path: src/inference.py
+      hash: md5
+      md5: 1ada599405bb1cc82011a6b439b9e224
+      size: 4504
+    outs:
+    - path: results/inference
+      hash: md5
+      md5: fa6bc566d1e6d12b648a24d0d58cb7ac.dir
+      size: 68198
+      nfiles: 2
+    - path: results/metrics
+      hash: md5
+      md5: 7d7a01befaa388f05d8792c4f7dfb94c.dir
+      size: 64
+      nfiles: 2

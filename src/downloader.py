@@ -32,7 +32,7 @@ def download_images_from_csv(csv_file, save_dir):
             download_image(url, save_dir, f"{idx}.png")
 
 if __name__ == "__main__":
-    dir = "/home/victor/Datasets/Data-Science/bugsCSV"
+    dir = "metadata"
     processes = [None] * 4
     for idx, csv_file in enumerate(os.listdir(dir)):
         save_dir = csv_file.split('.')[0]
